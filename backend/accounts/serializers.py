@@ -10,7 +10,7 @@ JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
 JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 
 
-class UserCreateSerializer(serializers.Serializer):
+class UserCreateSerializer(serializers.Serializer): 
     email = serializers.EmailField(required=True)
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True)
@@ -26,7 +26,7 @@ class UserCreateSerializer(serializers.Serializer):
         return user
     
     
-class UserLoginSerializer(serializers.Serializer):
+class UserLoginSerializer(serializers.Serializer): 
     email = serializers.CharField(max_length=64)
     password = serializers.CharField(max_length=128, write_only=True)
     token = serializers.CharField(max_length=255, read_only=True)

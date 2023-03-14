@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 
-
+#(Custom User Model)
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
