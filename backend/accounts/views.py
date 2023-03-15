@@ -1,5 +1,6 @@
+import json
 from django.shortcuts import render
-
+from django.core import serializers
 
 # Create your views here.
 from rest_framework import status
@@ -11,6 +12,7 @@ from rest_framework.permissions import AllowAny
 from .serializers import UserCreateSerializer
 from .serializers import UserLoginSerializer
 from .models import User
+
 
 
 @api_view(['POST'])
@@ -25,6 +27,7 @@ def createUser(request):
             serializer.save()
             return Response({"message": "ok"}, status=status.HTTP_201_CREATED)
         return Response({"message": "duplicate email"}, status=status.HTTP_409_CONFLICT)
+    
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -43,3 +46,11 @@ def login(request):
         }
         return Response(response, status=status.HTTP_200_OK)
 
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def userlist(request):
+    if request.method == 'GET':
+        users_list = serializers.serialize("json", User.objects.all())
+        return Response(json.loads(users_list), content_type="json", status=status.HTTP_200_OK)
+    
